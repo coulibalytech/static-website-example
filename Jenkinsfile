@@ -55,7 +55,7 @@ pipeline{
                     steps{
                         echo "========executing Test image========"
                         script{
-                            sh 'curl http://172.17.0.1 | grep -q "Hello world!"'
+                            sh 'curl http://172.17.0.1 | grep -q "Dimension"'
                         }
                     }
                     
@@ -132,7 +132,7 @@ pipeline{
                     steps{
                         echo "========executing Test staging========"
                         script{
-                            sh 'curl http://${STAGING_IP}:81 | grep -q "Hello world!"'
+                            sh 'curl http://${STAGING_IP}:81 | grep -q "Dimension"'
                         }
                     }
                     
@@ -171,7 +171,7 @@ pipeline{
                     steps{
                         echo "========executing Test staging========"
                         script{
-                            sh 'curl http://${PRODUCTION_IP}:81 | grep -q "Hello world!"'
+                            sh 'curl http://${PRODUCTION_IP}:81 | grep -q "Dimension"'
                         }
                     }
                     
