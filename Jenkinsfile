@@ -42,7 +42,7 @@ pipeline{
                         echo "========executing Run container based on builded image========"
                         script{
                             sh '''
-                            docker run --name $IMAGE_NAME -d -p 81:5000 -e PORT=5000 $REPOSITORY_NAME/$IMAGE_NAME:$IMAGE_TAG
+                            docker run --name $IMAGE_NAME -d -p 80:5000 -e PORT=5000 $REPOSITORY_NAME/$IMAGE_NAME:$IMAGE_TAG
                             sleep 5
 
                                 '''
@@ -55,7 +55,7 @@ pipeline{
                     steps{
                         echo "========executing Test image========"
                         script{
-                            sh 'curl http://172.18.0.1:81 | grep -q "Dimension"'
+                            sh 'curl http://172.18.0.1: | grep -q "Dimension"'
                         }
                     }
                     
@@ -116,7 +116,7 @@ pipeline{
                                remote_cmds="
                                docker pull ${REPOSITORY_NAME}/${IMAGE_NAME}:${IMAGE_TAG} &&
                                docker rm -f staging_${IMAGE_NAME} || true && 
-                               docker run --name staging_${IMAGE_NAME} -d -p 81:${STAGING_HTTP_PORT} -e PORT=${STAGING_HTTP_PORT} ${REPOSITORY_NAME}/${IMAGE_NAME}:${IMAGE_TAG}
+                               docker run --name staging_${IMAGE_NAME} -d -p 80:${STAGING_HTTP_PORT} -e PORT=${STAGING_HTTP_PORT} ${REPOSITORY_NAME}/${IMAGE_NAME}:${IMAGE_TAG}
                                "
                                # executing remote commands
                                ssh -o StrictHostKeyChecking=no ${STAGING_USER}@${STAGING_IP} "\$remote_cmds"
@@ -132,7 +132,7 @@ pipeline{
                     steps{
                         echo "========executing Test staging========"
                         script{
-                            sh 'curl http://${STAGING_IP}:81 | grep -q "Dimension"'
+                            sh 'curl http://${STAGING_IP}:80 | grep -q "Dimension"'
                         }
                     }
                     
@@ -155,7 +155,7 @@ pipeline{
                                remote_cmds="
                                docker pull ${REPOSITORY_NAME}/${IMAGE_NAME}:${IMAGE_TAG} &&
                                docker rm -f production_${IMAGE_NAME} || true && 
-                               docker run --name production_${IMAGE_NAME} -d -p 81:${PRODUCTION_HTTP_PORT} -e PORT=${PRODUCTION_HTTP_PORT} ${REPOSITORY_NAME}/${IMAGE_NAME}:${IMAGE_TAG}
+                               docker run --name production_${IMAGE_NAME} -d -p 80:${PRODUCTION_HTTP_PORT} -e PORT=${PRODUCTION_HTTP_PORT} ${REPOSITORY_NAME}/${IMAGE_NAME}:${IMAGE_TAG}
                                "
                                # executing remote commands
                                ssh -o StrictHostKeyChecking=no ${PRODUCTION_USER}@${PRODUCTION_IP} "\$remote_cmds"
@@ -171,7 +171,7 @@ pipeline{
                     steps{
                         echo "========executing Test staging========"
                         script{
-                            sh 'curl http://${PRODUCTION_IP}:81 | grep -q "Dimension"'
+                            sh 'curl http://${PRODUCTION_IP}:80 | grep -q "Dimension"'
                         }
                     }
                     
