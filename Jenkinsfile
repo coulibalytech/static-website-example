@@ -13,13 +13,13 @@ pipeline{
               STAGING_IP = "54.174.43.185"
               STAGING_USER = "ubuntu"
               STAGING_DEPLOY_PATH = "/home/ubuntu/app/staging"
-              STAGING_HTTP_PORT = "5000" // Port spécifique pour staging
+              STAGING_HTTP_PORT = "80" // Port spécifique pour staging
 
              // Production EC2
               PRODUCTION_IP = "54.173.247.138"
               PRODUCTION_USER = "ubuntu"
               PRODUCTION_DEPLOY_PATH = "/home/ubuntu/app/production"
-              PRODUCTION_HTTP_PORT = "5000" // Port spécifique pour production
+              PRODUCTION_HTTP_PORT = "80" // Port spécifique pour production
 
               SSH_CREDENTIALS_ID = "ec2_ssh_credentials"
               DOCKERHUB_CREDENTIALS = 'dockerhub-credentials-id'
@@ -42,7 +42,7 @@ pipeline{
                         echo "========executing Run container based on builded image========"
                         script{
                             sh '''
-                            docker run --name $IMAGE_NAME -d -p 80:5000 -e PORT=5000 $REPOSITORY_NAME/$IMAGE_NAME:$IMAGE_TAG
+                            docker run --name $IMAGE_NAME -d -p 80:80 -e PORT=5000 $REPOSITORY_NAME/$IMAGE_NAME:$IMAGE_TAG
                             sleep 5
 
                                 '''
