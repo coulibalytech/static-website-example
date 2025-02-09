@@ -55,7 +55,7 @@ pipeline{
                     steps{
                         echo "========executing Test image========"
                         script{
-                            sh 'curl http://172.17.0.1: | grep -q "Dimension"'
+                            sh 'curl http://localhost: | grep -q "Dimension"'
                         }
                     }
                     
