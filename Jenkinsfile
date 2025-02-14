@@ -10,18 +10,18 @@ pipeline{
               REPOSITORY_NAME = "coulibalytech"
 
             // Staging EC2
-              STAGING_IP = "54.174.43.185"
-              STAGING_USER = "ubuntu"
+              STAGING_IP = "192.168.56.18"
+              STAGING_USER = "vagrant"
               STAGING_DEPLOY_PATH = "/home/ubuntu/app/staging"
               STAGING_HTTP_PORT = "80" // Port spécifique pour staging
 
              // Production EC2
-              PRODUCTION_IP = "54.173.247.138"
-              PRODUCTION_USER = "ubuntu"
+              PRODUCTION_IP = "192.168.56.19"
+              PRODUCTION_USER = "vagrant"
               PRODUCTION_DEPLOY_PATH = "/home/ubuntu/app/production"
               PRODUCTION_HTTP_PORT = "80" // Port spécifique pour production
 
-              SSH_CREDENTIALS_ID = "ec2_ssh_credentials"
+              SSH_CREDENTIALS_ID = "staging_ssh_credentials"
               DOCKERHUB_CREDENTIALS = 'dockerhub-credentials-id'
           }
           agent none
